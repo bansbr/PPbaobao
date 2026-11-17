@@ -1,0 +1,28 @@
+services:
+  baby-journal:
+    build:
+      context: .
+      args:
+        # 拉不到 Docker Hub / npm 时，可用环境变量覆盖镜像源，详见 README 3.4
+        NODE_IMAGE: ${NODE_IMAGE:-node:22-alpine}
+        NPM_REGISTRY: ${NPM_REGISTRY:-https://registry.npmjs.org}
+    image: baby-journal:1.0.0
+    container_name: baby-journal
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      TZ: Asia/Shanghai
+      PORT: "3000"
+      # DATA_DIR: /app/data   # 数据库所在目录，默认即容器内 /app/data
+      # 首次启动才生效：初始系统管理员，默认 admin / 123456，建议改成强密码
+      # ADMIN_USERNAME: "admin"
+      # ADMIN_PASSWORD: "change-me-please"
+    volumes:
+      # 推荐命名卷：首次启动会自动初始化，升级镜像不会丢数据
+      - baby-data:/app/data
+      # 若想直接在本机看到数据库文件，可改用绑定挂载（先确保宿主机目录存在）：
+      # - ./data:/app/data
+
+volumes:
+  baby-data:

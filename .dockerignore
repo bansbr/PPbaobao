@@ -1,0 +1,9 @@
+node_modules
+data
+.ui-shots
+.git
+.gitignore
+.env
+*.log
+*.md
+!README.md

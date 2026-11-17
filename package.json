@@ -1,0 +1,21 @@
+{
+  "name": "baby-journal",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "宝宝成长记录系统：喂养、睡眠排泄、WHO 生长曲线、发育里程碑、医疗档案、童言童语",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --experimental-sqlite --no-warnings=ExperimentalWarning server.js",
+    "dev": "node --experimental-sqlite --no-warnings=ExperimentalWarning --watch server.js",
+    "check": "node --check server.js && node --check src/db.js && node --check src/api.js && node --check src/auth.js && node --check src/backup.js && node --check src/bootstrap.js && node --check src/meta.js && node --check src/schema.js && node --check public/js/app.js && node --check public/js/api.js && node --check public/js/ui.js && node --check public/js/views.js && node --check public/js/chart.js && node --check public/js/growth.js",
+    "smoke": "node scripts/smoke-test.mjs",
+    "ui:check": "node scripts/ui-check.mjs"
+  },
+  "engines": {
+    "node": ">=22.5 <23"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
